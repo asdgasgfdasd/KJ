@@ -80,7 +80,7 @@ local Button = MiscTab:CreateButton({
 })
 
 local Button = MiscTab:CreateButton({
-   Name = "have long dashes and speed (probably only works in ps)",
+   Name = "have long dashes and speed",
    Callback = function()
    Workspace.Characters.th3reaIKJ.WalkSpeedMultipliers.Admin.Value = 1.5
    end,
