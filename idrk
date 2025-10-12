@@ -39,7 +39,7 @@ else
             end
         end
     
-        local position: Folder = workspace:FindFirstChild("Themes")
+        local position: Folder = workspace:FindFirstChild("Assets.Songs")
         connection = position.ChildAdded:Connect(function(child)
             if child:IsA("Sound") and child.Name == "LastSurvivor" then 
                 if child.SoundId == "rbxassetid://71057332615441" or child.SoundId == "rbxassetid://115884097233860" or child.SoundId == "rbxassetid://80564889711353" then 
