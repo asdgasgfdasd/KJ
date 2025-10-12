@@ -1,0 +1,58 @@
+local debris = game:GetService("Debris")
+
+if connection then 
+    connection:Disconnect()
+    connection = nil
+end
+connection = nil
+
+function display(text, delete)
+    local message = Instance.new("Message", workspace)
+    message.Text = text
+    debris:AddItem(message, delete)
+end
+
+if _G.DONOTEXECUTE and _G.DONOTEXECUTE == true then
+    display("script is currently downloading audio, this might take a while. do not execute this script, please.", 5)
+else
+    if isfolder and makefolder and writefile and isfile and request and getcustomasset then
+        if not isfolder("om") then
+            makefolder("om")
+        end
+        
+        if not isfile("om/solo.mp3") then
+            display("began downloading last man standing song. this may take up to two minutes!", 5)
+            _G.DONOTEXECUTE = true
+            local soundData = request({
+                Method="GET",
+                Url="https://github.com/asdgasgfdasd/KJ/raw/refs/heads/main/The%20Sol%20Still%20Burns%20-%20SONIC.exe_%20OUTCOME%20MEMORIES%20OST.mp3"
+            }).Body
+            _G.DONOTEXECUTE = nil
+        
+            if soundData then 
+                writefile("om/solo.mp3", soundData)
+                display("done!",2)
+            else
+                display("failed to load lms.mp3. make sure catbox.moe isn't blocked in your region.",5)
+                return
+            end
+        end
+    
+        local position: Folder = workspace:FindFirstChild("Assets.Songs")
+        connection = position.ChildAdded:Connect(function(child)
+            if child:IsA("Sound") and child.Name == "Ambience" then 
+                if child.SoundId == "rbxassetid://99830489409590" or child.SoundId == "rbxassetid://102216713616447" or child.SoundId == "rbxassetid://104635517725559" or "rbxassetid://91619112782877" then 
+                    if _G.isEnabled then 
+                        child.SoundId = getcustomasset("om/solo.mp3", false)
+                        child.Volume = 1.5
+                    else
+                        connection:Destroy()
+                    end
+                end
+            end
+        end)
+    else
+        display("your explot doesn't support any of the required functions: \n* isfolder\n* makefolder\n* writefile\n* isfile\n* request\n* getcustomasset\nplease, switch your exploit in order to use this script. :(",10)
+        return
+    end
+end
